@@ -23,16 +23,16 @@ void SCH_Update()
 	if(TaskList.size && TaskList.head->Delay > 0) TaskList.head->Delay--;
 }
 
-int addTask(TaskControlBlock_t * task)
+void addTask(TaskControlBlock_t * task)
 {
     if(TaskList.size >= SCH_MAX_TASKS)
     {
-        return 1;
+        return;
     }
     if(TaskList.size == 0){
         TaskList.head = task;
         TaskList.size++;
-        return 0;
+        return;
     }
 
     TaskControlBlock_t * curr = TaskList.head;
@@ -58,7 +58,7 @@ int addTask(TaskControlBlock_t * task)
             found = 1;
         }
     }
-    return 0;
+    return;
 }
 
 void SCH_Add_Task(void (*functionPointer)(), unsigned int DELAY, unsigned int PERIOD)
